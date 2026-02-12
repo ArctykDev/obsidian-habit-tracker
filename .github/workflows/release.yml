@@ -51,7 +51,7 @@ jobs:
           mkdir -p release
           cp manifest.json main.js main.js.map styles.css versions.json release/
           cd release
-          zip -r obsidian-calendar-events.zip ./*
+          zip -r obsidian-habit-tracker.zip ./*
           cd ..
 
       - name: Publish GitHub Release
@@ -63,7 +63,7 @@ jobs:
             release/main.js.map
             release/styles.css
             release/versions.json
-            release/obsidian-calendar-events.zip
+            release/obsidian-habit-tracker.zip
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
