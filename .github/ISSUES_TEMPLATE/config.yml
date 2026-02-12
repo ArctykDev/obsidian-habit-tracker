@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation and Setup Guide
+    url: https://github.com/ArctykDev/obsidian-calendar-events#readme
+    about: Review the README for installation and configuration instructions before opening an issue.

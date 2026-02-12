@@ -1,0 +1,32 @@
+{
+    "name": "obsidian-habit-tracker",
+    "version": "0.1.0",
+    "description": "A powerful habit tracking plugin for Obsidian to build and maintain daily habits.",
+    "main": "main.js",
+    "scripts": {
+        "dev": "rollup -c -w",
+        "build": "rollup -c",
+        "clean": "rimraf dist build main.js main.js.map"
+    },
+    "keywords": [
+        "obsidian",
+        "plugin",
+        "productivity",
+        "habits",
+        "tracker",
+        "streaks"
+    ],
+    "author": "James Hawkins",
+    "license": "MIT",
+    "type": "module",
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "^25.0.7",
+        "@rollup/plugin-node-resolve": "^15.2.3",
+        "@rollup/plugin-typescript": "^11.1.6",
+        "obsidian": "latest",
+        "rimraf": "^6.0.1",
+        "rollup": "^4.5.0",
+        "tslib": "^2.6.2",
+        "typescript": "^5.4.5"
+    }
+}

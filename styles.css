@@ -1,0 +1,452 @@
+/* Habit Tracker View Styles */
+
+.habit-tracker-view {
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Header */
+.habit-tracker-header {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.habit-tracker-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.habit-tracker-header h2 {
+  margin: 0 0 5px 0;
+  font-size: 1.5em;
+  flex: 1;
+}
+
+.habit-settings-button {
+  padding: 6px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.habit-settings-button:hover {
+  background-color: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+.habit-settings-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+.habit-tracker-date {
+  color: var(--text-muted);
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+
+.habit-add-button {
+  padding: 8px 16px;
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.habit-add-button:hover {
+  background-color: var(--interactive-accent-hover);
+}
+
+/* Habits Container */
+.habits-container {
+  margin-bottom: 20px;
+}
+
+.habit-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  margin-bottom: 8px;
+  background-color: var(--background-secondary);
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.habit-item:hover {
+  background-color: var(--background-secondary-alt);
+}
+
+.habit-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.habit-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.habit-name {
+  font-weight: 500;
+  font-size: 1em;
+}
+
+.habit-description {
+  font-size: 0.85em;
+  color: var(--text-muted);
+}
+
+.habit-streak {
+  font-size: 0.85em;
+  color: var(--text-accent);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.habit-actions-btn {
+  padding: 4px 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 1.2em;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.habit-actions-btn:hover {
+  background-color: var(--background-modifier-hover);
+}
+
+/* Empty State */
+.habits-empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+}
+
+.habits-empty-state p {
+  margin: 10px 0;
+}
+
+/* Suggestions */
+.habit-suggestions {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+}
+
+.habit-suggestion-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  margin: 6px 0;
+  background-color: var(--background-secondary);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.habit-suggestion-item:hover {
+  background-color: var(--background-modifier-hover);
+}
+
+.suggestion-add-btn {
+  padding: 4px 12px;
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.85em;
+  transition: background-color 0.2s;
+}
+
+.suggestion-add-btn:hover {
+  background-color: var(--interactive-accent-hover);
+}
+
+/* Stats Section */
+.habit-stats {
+  margin-top: 30px;
+  padding: 15px;
+  background-color: var(--background-secondary);
+  border-radius: 6px;
+}
+
+.habit-stats h3 {
+  margin: 0 0 12px 0;
+  font-size: 1.1em;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background-color: var(--background-primary);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--interactive-accent), var(--interactive-accent-hover));
+  transition: width 0.3s ease;
+  border-radius: 10px;
+}
+
+.progress-text {
+  font-size: 0.9em;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* Responsive */
+@media (max-width: 400px) {
+  .habit-tracker-view {
+    padding: 10px;
+  }
+
+  .habit-item {
+    padding: 10px;
+  }
+}
+
+/* ============================================ */
+/* Habit History Modal Styles */
+/* ============================================ */
+
+.habit-history-modal {
+  padding: 20px;
+}
+
+.habit-history-description {
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.habit-history-stats {
+  margin-bottom: 30px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.stat-box {
+  background-color: var(--background-secondary);
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid var(--background-modifier-border);
+}
+
+.stat-icon {
+  font-size: 2em;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: 1.5em;
+  font-weight: 600;
+  color: var(--text-accent);
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 0.85em;
+  color: var(--text-muted);
+}
+
+.history-section-title {
+  margin: 25px 0 15px 0;
+  font-size: 1.2em;
+  border-bottom: 1px solid var(--background-modifier-border);
+  padding-bottom: 8px;
+}
+
+.history-empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 20px;
+  font-style: italic;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.history-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  background-color: var(--background-secondary);
+  border-radius: 6px;
+  border-left: 3px solid var(--interactive-accent);
+}
+
+.history-checkmark {
+  color: var(--interactive-accent);
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.history-date-info {
+  flex: 1;
+}
+
+.history-date {
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.history-days-ago {
+  font-size: 0.85em;
+  color: var(--text-muted);
+}
+
+.history-note {
+  font-size: 0.9em;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 8px;
+}
+
+.history-note-text {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85em;
+  margin-top: 10px;
+}
+
+/* Calendar Visualization */
+.habit-calendar {
+  margin: 20px 0;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.calendar-day-label {
+  text-align: center;
+  font-size: 0.75em;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendar-cell {
+  aspect-ratio: 1;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.calendar-cell:hover {
+  transform: scale(1.1);
+}
+
+.calendar-cell.completed {
+  background-color: var(--interactive-accent);
+}
+
+.calendar-cell.missed {
+  background-color: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+}
+
+.calendar-cell.future {
+  background-color: var(--background-primary);
+  opacity: 0.3;
+}
+
+.calendar-cell.today {
+  border: 2px solid var(--text-accent);
+}
+
+.modal-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid var(--background-modifier-border);
+}
+
+.modal-button-container button {
+  padding: 8px 24px;
+}
+
+
+    containerEl.createEl("hr", { attr: { style: "margin: 32px 0 24px 0;" } });
+    
+    new Setting(containerEl).setName("Support development").setHeading();
+    
+    new Setting(containerEl)
+      .setName("Documentation & Updates")
+      .setDesc("Visit the official website for documentation, guides, and updates")
+      .addButton((btn) => {
+        btn
+          .setButtonText("Visit projectplanner.md")
+          .onClick(() => {
+            window.open("https://projectplanner.md", "_blank");
+          });
+      });
+    
+    const coffeeSetting = new Setting(containerEl)
+      .setName("Buy me a coffee")
+      .setDesc("If you find this plugin useful, consider supporting development!");
+    
+    // Add Buy Me a Coffee button in the same row
+    const coffeeLink = coffeeSetting.controlEl.createEl("a", {
+      href: "https://www.buymeacoffee.com/arctykdev"
+    });
+    coffeeLink.setAttribute("target", "_blank");
+    coffeeLink.setAttribute("rel", "noopener noreferrer");
+    
+    const coffeeImg = coffeeLink.createEl("img", {
+      attr: {
+        src: "https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png",
+        alt: "Buy Me A Coffee"
+      }
+    });
+    coffeeImg.style.height = "40px";
+    coffeeImg.style.width = "145px";
+    coffeeImg.style.verticalAlign = "middle";
+  }

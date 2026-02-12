@@ -1,0 +1,12 @@
+{
+    "id": "habit-tracker",
+    "name": "Habit Tracker",
+    "version": "0.1.0",
+    "minAppVersion": "1.4.0",
+    "description": "Track your daily habits, build streaks, and visualize your progress over time.",
+    "author": "James Hawkins",
+    "authorUrl": "https://arctyk.dev",
+    "isDesktopOnly": false,
+    "main": "main.js"
+  }
+  
