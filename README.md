@@ -52,6 +52,16 @@ This means you can:
 - ✅ Keep your data in version control
 - ✅ Back up habits with your vault
 
+## Screenshots
+
+![Habit Tracker](assets/habit-tracker.png)
+
+![Edit a habit](assets/edit-habit.png)
+
+![Habit history](assets/habit-history.png)
+
+![Habit Tracker settings](assets/habit-tracker-settings.png)
+
 ## Installation
 
 ### Manual Installation
