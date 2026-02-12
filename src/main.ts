@@ -1,4 +1,4 @@
-import { Plugin, WorkspaceLeaf, Notice } from "obsidian";
+import { Plugin, WorkspaceLeaf, Notice, TFile, TAbstractFile } from "obsidian";
 import { HabitTrackerSettingTab, DEFAULT_SETTINGS } from "./settings";
 import { VIEW_TYPE_HABIT_TRACKER, HabitsView } from "./ui/ThingsView";
 import { AddHabitModal } from "./ui/AddHabitModal";
@@ -43,6 +43,39 @@ export default class HabitTrackerPlugin extends Plugin {
           new Notice("Error loading habit data. Check console for details.");
         }
       });
+
+      // Watch for file changes in the Habits folder
+      this.registerEvent(
+        this.app.vault.on("modify", async (file) => {
+          if (file instanceof TFile && this.isHabitFile(file)) {
+            await this.reloadHabitData();
+          }
+        })
+      );
+
+      this.registerEvent(
+        this.app.vault.on("create", async (file) => {
+          if (file instanceof TFile && this.isHabitFile(file)) {
+            await this.reloadHabitData();
+          }
+        })
+      );
+
+      this.registerEvent(
+        this.app.vault.on("delete", async (file) => {
+          if (this.isHabitFile(file)) {
+            await this.reloadHabitData();
+          }
+        })
+      );
+
+      this.registerEvent(
+        this.app.vault.on("rename", async (file, oldPath) => {
+          if (this.isHabitFile(file) || oldPath.startsWith(this.settings.habitsFolder + "/")) {
+            await this.reloadHabitData();
+          }
+        })
+      );
     } catch (error) {
       console.error("Error loading Habit Tracker plugin:", error);
       new Notice("Error loading Habit Tracker plugin. Check console for details.");
@@ -280,5 +313,19 @@ export default class HabitTrackerPlugin extends Plugin {
         leaf.view.refresh();
       }
     });
+  }
+
+  private isHabitFile(file: TAbstractFile): boolean {
+    return file.path.startsWith(this.settings.habitsFolder + "/") && 
+           file.path.endsWith(".md");
+  }
+
+  private async reloadHabitData() {
+    try {
+      await this.loadHabitData();
+      this.refreshView();
+    } catch (error) {
+      console.error("Error reloading habit data:", error);
+    }
   }
 }
