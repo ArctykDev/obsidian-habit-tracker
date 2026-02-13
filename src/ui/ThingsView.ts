@@ -8,10 +8,12 @@ export const VIEW_TYPE_HABIT_TRACKER = "habit-tracker-view";
 
 export class HabitsView extends ItemView {
   private plugin: HabitTrackerPlugin;
+  private currentDate: string;
 
   constructor(leaf: WorkspaceLeaf, plugin: HabitTrackerPlugin) {
     super(leaf);
     this.plugin = plugin;
+    this.currentDate = this.plugin.getTodayDate();
   }
 
   getViewType(): string {
@@ -71,11 +73,49 @@ export class HabitsView extends ItemView {
       (this.app as any).setting.openTabById("habit-tracker");
     });
     
-    const todayDate = this.plugin.getTodayDate();
-    const dateDisplay = headerDiv.createEl("div", {
-      cls: "habit-tracker-date",
-      text: this.formatDateDisplay(todayDate),
+    // Date navigation
+    const dateNavDiv = headerDiv.createDiv({ cls: "habit-date-nav" });
+    
+    const prevButton = dateNavDiv.createEl("button", {
+      cls: "habit-date-nav-btn",
+      attr: { "aria-label": "Previous day" },
     });
+    setIcon(prevButton, "chevron-left");
+    prevButton.addEventListener("click", () => {
+      this.changeDate(-1);
+    });
+    
+    const dateDisplay = dateNavDiv.createEl("div", {
+      cls: "habit-tracker-date",
+      text: this.formatDateDisplay(this.currentDate),
+    });
+    
+    const todayDate = this.plugin.getTodayDate();
+    const isToday = this.currentDate === todayDate;
+    if (!isToday) {
+      dateDisplay.addClass("habit-tracker-date-past");
+    }
+    
+    const nextButton = dateNavDiv.createEl("button", {
+      cls: "habit-date-nav-btn",
+      attr: { "aria-label": "Next day" },
+    });
+    setIcon(nextButton, "chevron-right");
+    nextButton.addEventListener("click", () => {
+      this.changeDate(1);
+    });
+    
+    // Only show "Today" button if not viewing today
+    if (!isToday) {
+      const todayButton = dateNavDiv.createEl("button", {
+        cls: "habit-today-button",
+        text: "Today",
+      });
+      todayButton.addEventListener("click", () => {
+        this.currentDate = todayDate;
+        this.refresh();
+      });
+    }
 
     // Add Habit Button
     const addButton = headerDiv.createEl("button", {
@@ -111,14 +151,21 @@ export class HabitsView extends ItemView {
       }
     } else {
       activeHabits.forEach(habit => {
-        this.renderHabitItem(habitsContainer, habit, todayDate);
+        this.renderHabitItem(habitsContainer, habit, this.currentDate);
       });
     }
 
     // Stats section (if enabled)
     if (this.plugin.settings.showCompletionRate && activeHabits.length > 0) {
-      this.renderStats(container, activeHabits, todayDate);
+      this.renderStats(container, activeHabits, this.currentDate);
     }
+  }
+
+  private changeDate(days: number) {
+    const date = new Date(this.currentDate);
+    date.setDate(date.getDate() + days);
+    this.currentDate = this.plugin.formatDate(date);
+    this.refresh();
   }
 
   private renderHabitItem(container: HTMLElement, habit: Habit, date: string) {
@@ -175,7 +222,8 @@ export class HabitsView extends ItemView {
 
   private renderStats(container: HTMLElement, habits: Habit[], date: string) {
     const statsDiv = container.createDiv({ cls: "habit-stats" });
-    statsDiv.createEl("h3", { text: "Today's Progress" });
+    const isToday = date === this.plugin.getTodayDate();
+    statsDiv.createEl("h3", { text: isToday ? "Today's Progress" : "Progress" });
 
     const completed = habits.filter(h =>
       this.plugin.getHabitCompletion(h.id, date)
